@@ -4,35 +4,27 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nasha</title>
-    <style>
-        html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background-color: #ffffff; }
-        iframe { width: 100%; height: 100%; border: none; }
-    </style>
 </head>
 <body>
 
     <script>
         var fullUrl = window.location.href;
 
-        // Хэши первой страницы
         var qr1 = "aDdmQTFqQVdpOTI3ZGc0Mk5GelNBYmxRbWx1SUpjVzc1SXlBdGUzYzNXYz0=";
         var doc1 = "UlVjM3VoTTlVcW40L3RGNld0ejArZDBUbVNtcXMvWlg2Vklvc3RnN3lEM2Z3d2dpUUhaWEFKeUs2NjIyY2xvcW1PQzJnWFlOVDFNR2VKTzlLaFg5V001Y1BQcXJoYUR4amhiTytUMUVscityT1p5amFSWVFQemVRU1MwYlZFd3R0bVY3Rk5QZlU5QmRsc01tbWg0R0NnPT0xNOLABELx";
         
-        // Хэши второй страницы
         var qr2 = "aDdmQTFqQVdpOTI3ZGc0Mk5GelNBYmxRbWx1SUpjVzc1SXlBdGUzY05FVzI=";
         var doc2 = "UlVjM3VoTTlVcW40L3RGNld0ejArZDBUbVNtcXMvWlg2Vklvc3RnN3lEM2Z3d2dpUUhaWEFKeUs2NjIyY2xvcW1PQzJnWFlOVDFNR2VKTzlLaFg5V001Y1BTRmFmY2VydGlmaWNhdGU=";
 
-        // 1. ЛОВИМ КНОПКУ ДОКУМЕНТА 1
+        // 1. ПРЯМОЙ ПЕРЕХОД НА ДОКУМЕНТ 1
         if (fullUrl.indexOf(doc1) !== -1) {
-            var fileUrl = window.location.origin + "/assets/data/tranfer/attachment/display/inline/A.3.01 Classification Certificate.pdf";
-            document.body.innerHTML = '<iframe src="' + fileUrl + '"></iframe>';
+            window.location.replace(window.location.origin + "/assets/data/tranfer/attachment/display/inline/A.3.01 Classification Certificate.pdf");
         } 
-        // 2. ЛОВИМ КНОПКУ ДОКУМЕНТА 2 (Новый)
+        // 2. ПРЯМОЙ ПЕРЕХОД НА ДОКУМЕНТ 2
         else if (fullUrl.indexOf(doc2) !== -1) {
-            var fileUrl = window.location.origin + "/assets/data/tranfer/attachment/display/inline/A_3_03_SE_Cargo_Ship_Safety_Equipment_Certificate_with_FORM_E_DWT=159149.pdf";
-            document.body.innerHTML = '<iframe src="' + fileUrl + '"></iframe>';
+            window.location.replace(window.location.origin + "/assets/data/tranfer/attachment/display/inline/A_3_03_SE_Cargo_Ship_Safety_Equipment_Certificate_with_FORM_E_DWT=159149.pdf");
         }
-        // 3. ЛОВИМ ЛЮБОЙ ИЗ ДВУХ QR-КОДОВ (Загружаем index.html)
+        // 3. ОТКРЫТИЕ СТРАНИЦ СУДНА ПО QR
         else if (fullUrl.indexOf(qr1) !== -1 || fullUrl.indexOf(qr2) !== -1) {
             fetch(window.location.origin + '/index.html')
                 .then(response => response.text())
@@ -45,7 +37,7 @@
                     window.location.replace("https://verified.nashapanama.com/");
                 });
         }
-        // 4. ВСЕ ОСТАЛЬНЫЕ СЛУЧАИ (Редирект на сторонний сайт)
+        // 4. ВСЕ ОСТАЛЬНЫЕ СЛУЧАИ
         else {
             window.location.replace("https://verified.nashapanama.com/");
         }
