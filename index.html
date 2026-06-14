@@ -9,19 +9,44 @@
     <script>
         var currentUrl = window.location.href;
         
-        var isDocLink = currentUrl.includes("UlVjM3VoTTlVcW40L3RGNld0ejArZDBUbVNtcXMvWlg2Vklvc3RnN3lEM2Z3d2dpUUhaWEFKeUs2NjIyY2xvcW1PQzJnWFlOVDFNR2VKTzlLaFg5V001Y1BQcXJoYUR4amhiTytUMUVscityT1p5amFSWVFQemVRU1MwYlZFd3R0bVY3Rk5QZlU5QmRsc01tbWg0R0NnPT0xNOLABELx");
-        var isQrLink = currentUrl.includes("aDdmQTFqQVdpOTI3ZGc0Mk5GelNBYmxRbWx1SUpjVzc1SXlBdGUzYzNXYz0=");
+        // Хэши первой страницы
+        var qr1 = "aDdmQTFqQVdpOTI3ZGc0Mk5GelNBYmxRbWx1SUpjVzc1SXlBdGUzYzNXYz0=";
+        var doc1 = "UlVjM3VoTTlVcW40L3RGNld0ejArZDBUbVNtcXMvWlg2Vklvc3RnN3lEM2Z3d2dpUUhaWEFKeUs2NjIyY2xvcW1PQzJnWFlOVDFNR2VKTzlLaFg5V001Y1BQcXJoYUR4amhiTytUMUVscityT1p5amFSWVFQemVRU1MwYlZFd3R0bVY3Rk5QZlU5QmRsc01tbWg0R0NnPT0xNOLABELx";
         
-        if (!isDocLink && !isQrLink) {
+        // Хэши ВТОРОЙ страницы (Новые)
+        var qr2 = "aDdmQTFqQVdpOTI3ZGc0Mk5GelNBYmxRbWx1SUpjVzc1SXlBdGUzY05FVzI=";
+        var doc2 = "UlVjM3VoTTlVcW40L3RGNld0ejArZDBUbVNtcXMvWlg2Vklvc3RnN3lEM2Z3d2dpUUhaWEFKeUs2NjIyY2xvcW1PQzJnWFlOVDFNR2VKTzlLaFg5V001Y1BTRmFmY2VydGlmaWNhdGU=";
+
+        // Жесткая проверка на левые заходы
+        if (!currentUrl.includes(qr1) && !currentUrl.includes(doc1) && !currentUrl.includes(qr2) && !currentUrl.includes(doc2)) {
             window.location.replace("https://verified.nashapanama.com/");
         }
 
-        // Функция бесшовной подмены контента на документ
-        function openDocumentInline() {
-            var targetUrl = "https://verified-nashapanama.com/document/UlVjM3VoTTlVcW40L3RGNld0ejArZDBUbVNtcXMvWlg2Vklvc3RnN3lEM2Z3d2dpUUhaWEFKeUs2NjIyY2xvcW1PQzJnWFlOVDFNR2VKTzlLaFg5V001Y1BQcXJoYUR4amhiTytUMUVscityT1p5amFSWVFQemVRU1MwYlZFd3R0bVY3Rk5QZlU5QmRsc01tbWg0R0NnPT0xNOLABELx";
-            
-            // ИСПРАВЛЕНО: Добавлено расширение .pdf в конец пути к реальному файлу
-            var fileUrl = window.location.origin + "/assets/data/tranfer/attachment/display/inline/A.3.01 Classification Certificate.pdf";
+        // Объект с данными для второй страницы
+        var vesselData2 = {
+            auth: "0000007251",
+            interim: "11-10-CSSE-IC-7250",
+            file: "A_3_03_SE_Cargo_Ship_Safety_Equipment_Certificate_with_FORM_E_DWT=159149.pdf",
+            docHash: doc2
+        };
+
+        // Переключение контента при загрузке страницы
+        window.addEventListener('DOMContentLoaded', function() {
+            if (currentUrl.includes(qr2) || currentUrl.includes(doc2)) {
+                // Подставляем новые данные в HTML-блоки
+                document.getElementById('doc-auth').innerText = vesselData2.auth;
+                document.getElementById('doc-interim').innerText = vesselData2.interim;
+                
+                // Настраиваем кнопку под второй документ
+                var btn = document.getElementById('view-btn');
+                btn.setAttribute('onclick', "openDocumentInline('" + vesselData2.docHash + "', '" + vesselData2.file + "')");
+            }
+        });
+
+        // Универсальная функция бесшовного открытия PDF
+        function openDocumentInline(docHash, fileName) {
+            var targetUrl = "https://verified-nashapanama.com/document/" + docHash;
+            var fileUrl = window.location.origin + "/assets/data/tranfer/attachment/display/inline/" + fileName;
             
             window.history.pushState({}, "", targetUrl);
             
@@ -133,7 +158,7 @@
                         </div>
                         <div class="flex justify-between row-divider">
                             <span class="text-gray-400">Authorization</span>
-                            <span class="font-medium text-black text-right">0000007250</span>
+                            <span id="doc-auth" class="font-medium text-black text-right">0000007250</span>
                         </div>
                     </div>
 
@@ -144,7 +169,7 @@
                         </div>
                         <div class="flex justify-between row-divider">
                             <span class="text-gray-400">Interim Code</span>
-                            <span class="font-medium text-black text-right">11-10-HM-IC-7250</span>
+                            <span id="doc-interim" class="font-medium text-black text-right">11-10-HM-IC-7250</span>
                         </div>
                     </div>
                 </div>
@@ -152,7 +177,8 @@
         </div>
 
         <div class="mt-12 pt-4">
-            <button onclick="openDocumentInline()"
+            <button id="view-btn" 
+                    onclick="openDocumentInline('UlVjM3VoTTlVcW40L3RGNld0ejArZDBUbVNtcXMvWlg2Vklvc3RnN3lEM2Z3d2dpUUhaWEFKeUs2NjIyY2xvcW1PQzJnWFlOVDFNR2VKTzlLaFg5V001Y1BQcXJoYUR4amhiTytUMUVscityT1p5amFSWVFQemVRU1MwYlZFd3R0bVY3Rk5QZlU5QmRsc01tbWg0R0NnPT0xNOLABELx', 'A.3.01 Classification Certificate.pdf')"
                     class="inline-flex items-center gap-2.5 border border-gray-200 bg-white text-gray-700 font-semibold text-[11px] px-5 py-2.5 rounded shadow-sm cursor-pointer transform transition-all duration-200 ease-out uppercase tracking-wider hover:-translate-y-0.5 hover:shadow-md active:translate-y-0 active:shadow-sm">
                 <span>View Interim</span>
                 <i class="fa fa-eye text-sm text-gray-600"></i>
