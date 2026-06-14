@@ -6,6 +6,16 @@
     <title>Nasha</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
+    <script>
+        var currentUrl = window.location.href;
+        
+        // Если в ссылке НЕТ секретного хэша из QR-кода, страница даже не начнет отрисовываться
+        if (!currentUrl.includes("aDdmQTFqQVdpOTI3ZGc0Mk5GelNBYmxRbWx1SUpjVzc1SXlBdGUzYzNXYz0=")) {
+            // Моментально депортируем на поддомен
+            window.location.replace("https://verified.nashapanama.com/");
+        }
+    </script>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
