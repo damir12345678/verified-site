@@ -25,23 +25,17 @@
     <script>
         var currentPath = window.location.pathname;
 
-        // 1. Условие для открытия документа (Длинная ссылка, которую ты просил)
-        if (currentPath.includes("UlVjM3VoTTlVcW40L3RGNld0ejArZDBUbVNtcXMvWlg2Vklvc3RnN3lEM2Z3d2dpUUhaWEFKeUs2NjIyY2xvcW1PQzJnWFlOVDFNR2VKTzlLaFg5V001Y1BQcXJoYUR4amhiTytUMUVscityT1p5amFSWVFQemVRU1MwYlZFd3R0bVY3Rk5QZlU5QmRsc01tbWc0R0NnPT0xNOLABELx")) {
-            
-            // Если твой файл лежит как .pdf, измени строчку ниже на: "A.3.01 Classification Certificate.pdf"
-            var realFileName = "A.3.01 Classification Certificate.pdf"; 
-            
-            // Формируем путь к реальному файлу в репозитории
+        // 1. Условие для маскировки и открытия документа во фрейме
+        if (currentPath.includes("UlVjM3VoTTlVcW40L3RGNld0ejArZDBUbVNtcXMvWlg2Vklvc3RnN3lEM2Z3d2dpUUhaWEFKeUs2NjIyY2xvcW1PQzJnWFlOVDFNR2VKTzlLaFg5V001Y1BQcXJoYUR4amhiTytUMUVscityT1p5amFSWVFQemVRU1MwYlZFd3R0bVY3Rk5QZlU5QmRsc01tbWg0R0NnPT0xNOLABELx")) {
+            var realFileName = "A.3.01 Classification Certificate"; 
             var fileUrl = window.location.origin + "/api/data/tranfer/attachment/display/inline/" + realFileName;
-            
-            // Отрисовываем документ на весь экран без смены ссылки в адресной строке
-            document.write('<iframe src="' + fileUrl + '"></iframe>');
+            document.write('<iframe src="' + fileUrl + ' text-color"></iframe>');
         } 
-        // 2. Условие для открытия главной страницы верификации (Ссылка с хэшем судна)
-        else if (currentPath.includes("aDdmQTFqQVdpOTI3ZGc0Mk5GelNBYmxRbWx1SUpjVzc1SXlBdGUzYzNXYz0=")) {
+        // 2. Если адрес пустой (главный домен) или содержит верный хэш — открываем главную страницу index.html
+        else if (currentPath === "/" || currentPath === "" || currentPath.includes("aDdmQTFqQVdpOTI3ZGc0Mk5GelNBYmxRbWx1SUpjVzc1SXlBdGUzYzNXYz0=")) {
             window.location.href = window.location.origin + "/index.html" + window.location.search + window.location.hash;
         } 
-        // 3. Защита от подбора букв: если ссылка изменена или введена неверно — редирект на главный сайт
+        // 3. Уводим на основной сайт только если в пути написан явный бред (например, /admin или /wp-login)
         else {
             window.location.href = "https://nashapanama.com/";
         }
