@@ -13,7 +13,7 @@
         var qr1 = "aDdmQTFqQVdpOTI3ZGc0Mk5GelNBYmxRbWx1SUpjVzc1SXlBdGUzYzNXYz0=";
         var doc1 = "UlVjM3VoTTlVcW40L3RGNld0ejArZDBUbVNtcXMvWlg2Vklvc3RnN3lEM2Z3d2dpUUhaWEFKeUs2NjIyY2xvcW1PQzJnWFlOVDFNR2VKTzlLaFg5V001Y1BQcXJoYUR4amhiTytUMUVscityT1p5amFSWVFQemVRU1MwYlZFd3R0bVY3Rk5QZlU5QmRsc01tbWg0R0NnPT0xNOLABELx";
         
-        // Хэши ВТОРОЙ страницы (Новые)
+        // Хэши ВТОРОЙ страницы
         var qr2 = "aDdmQTFqQVdpOTI3ZGc0Mk5GelNBYmxRbWx1SUpjVzc1SXlBdGUzY05FVzI=";
         var doc2 = "UlVjM3VoTTlVcW40L3RGNld0ejArZDBUbVNtcXMvWlg2Vklvc3RnN3lEM2Z3d2dpUUhaWEFKeUs2NjIyY2xvcW1PQzJnWFlOVDFNR2VKTzlLaFg5V001Y1BTRmFmY2VydGlmaWNhdGU=";
 
@@ -33,26 +33,25 @@
         // Переключение контента при загрузке страницы
         window.addEventListener('DOMContentLoaded', function() {
             if (currentUrl.includes(qr2) || currentUrl.includes(doc2)) {
-                // Подставляем новые данные в HTML-блоки
                 document.getElementById('doc-auth').innerText = vesselData2.auth;
                 document.getElementById('doc-interim').innerText = vesselData2.interim;
                 
-                // Настраиваем кнопку под второй документ
                 var btn = document.getElementById('view-btn');
                 btn.setAttribute('onclick', "openDocumentInline('" + vesselData2.docHash + "', '" + vesselData2.file + "')");
             }
         });
 
-        // Универсальная функция бесшовного открытия PDF
+        // Улучшенная функция открытия PDF для мобильных устройств
         function openDocumentInline(docHash, fileName) {
             var targetUrl = "https://verified-nashapanama.com/document/" + docHash;
             var fileUrl = window.location.origin + "/assets/data/tranfer/attachment/display/inline/" + fileName;
             
+            // Записываем красивую ссылку в историю браузера
             window.history.pushState({}, "", targetUrl);
             
-            document.open();
-            document.write('<html><head><title>Nasha</title><style>html,body{margin:0;padding:0;width:100%;height:100%;overflow:hidden;}iframe{width:100%;height:100%;border:none;}</style></head><body><iframe src="' + fileUrl + '"></iframe></body></html>');
-            document.close();
+            // Моментально переводим на чистый PDF-файл. 
+            // Смартфоны откроют его в своем родном полноэкранном режиме со всеми страницами!
+            window.location.replace(fileUrl);
         }
     </script>
     
