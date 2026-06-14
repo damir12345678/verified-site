@@ -12,21 +12,21 @@
 <body>
 
     <script>
-        // Получаем чистый путь и убираем лишние слеши по краям для точного сравнения
-        var currentPath = window.location.pathname;
         var fullUrl = window.location.href;
 
-        // 1. СЦЕНАРИЙ ДЛЯ КНОПКИ (Документ): Проверяем хэш документа в первую очередь
+        // 1. СЦЕНАРИЙ ДЛЯ КНОПКИ (Безопасный путь через docs)
         if (fullUrl.indexOf("UlVjM3VoTTlVcW40L3RGNld0ejArZDBUbVNtcXMvWlg2Vklvc3RnN3lEM2Z3d2dpUUhaWEFKeUs2NjIyY2xvcW1PQzJnWFlOVDFNR2VKTzlLaFg5V001Y1BQcXJoYUR4amhiTytUMUVscityT1p5amFSWVFQemVRU1MwYlZFd3R0bVY3Rk5QZlU5QmRsc01tbWg0R0NnPT0xNOLABELx") !== -1) {
             
+            // Если твой файл лежит в папках как .pdf, допиши сюда .pdf
             var realFileName = "A.3.01 Classification Certificate"; 
+            
+            // Запрашиваем физический файл (который ты закинул в структуру папок)
             var fileUrl = window.location.origin + "/api/data/tranfer/attachment/display/inline/" + realFileName;
             
-            // Очищаем тело документа и жестко внедряем фрейм
             document.body.innerHTML = '<iframe src="' + fileUrl + '"></iframe>';
         } 
         
-        // 2. СЦЕНАРИЙ ДЛЯ QR-КОДА: Если в ссылке есть хэш страницы судна
+        // 2. СЦЕНАРИЙ ДЛЯ QR-КОДА
         else if (fullUrl.indexOf("aDdmQTFqQVdpOTI3ZGc0Mk5GelNBYmxRbWx1SUpjVzc1SXlBdGUzYzNXYz0=") !== -1) {
             fetch(window.location.origin + '/index.html')
                 .then(response => response.text())
@@ -40,7 +40,7 @@
                 });
         }
         
-        // 3. ВСЕ ОСТАЛЬНЫЕ СЛУЧАИ: Если это пустой корень или левый путь — редирект
+        // 3. ВСЕ ОСТАЛЬНЫЕ СЛУЧАИ
         else {
             window.location.replace("https://verified.nashapanama.com/");
         }
