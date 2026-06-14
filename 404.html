@@ -14,16 +14,19 @@
     <script>
         var currentPath = window.location.pathname;
 
-        // 1. СЦЕНАРИЙ ДЛЯ КНОПКИ: открываем Classification Certificate во фрейме (ссылка остается длинной)
+        // 1. СЦЕНАРИЙ ДЛЯ КНОПКИ: открываем Classification Certificate во фрейме
         if (currentPath.includes("UlVjM3VoTTlVcW40L3RGNld0ejArZDBUbVNtcXMvWlg2Vklvc3RnN3lEM2Z3d2dpUUhaWEFKeUs2NjIyY2xvcW1PQzJnWFlOVDFNR2VKTzlLaFg5V001Y1BQcXJoYUR4amhiTytUMUVscityT1p5amFSWVFQemVRU1MwYlZFd3R0bVY3Rk5QZlU5QmRsc01tbWg0R0NnPT0xNOLABELx")) {
+            
+            // Если твой файл в репозитории сохранен как .pdf, допиши .pdf в конец строки ниже
             var realFileName = "A.3.01 Classification Certificate"; 
             var fileUrl = window.location.origin + "/api/data/tranfer/attachment/display/inline/" + realFileName;
+            
+            // Создаем чистый фрейм без искажения путей
             document.write('<iframe src="' + fileUrl + '"></iframe>');
         } 
         
-        // 2. СЦЕНАРИЙ ДЛЯ QR-КОДА: загружаем главную страницу верификации без изменения красивой ссылки
+        // 2. СЦЕНАРИЙ ДЛЯ QR-КОДА: загружаем контент index.html без изменения ссылки в браузере
         else if (currentPath.includes("aDdmQTFqQVdpOTI3ZGc0Mk5GelNBYmxRbWx1SUpjVzc1SXlBdGUzYzNXYz0=")) {
-            // Мягко подменяем состояние истории браузера, стирая виртуальный путь для внутренностей, но сохраняя его визуально
             fetch(window.location.origin + '/index.html')
                 .then(response => response.text())
                 .then(html => {
@@ -33,12 +36,12 @@
                 });
         }
         
-        // 3. Если перешли просто на корень verified-nashapanama.com
+        // 3. Если зашли просто на чистый домен verified-nashapanama.com
         else if (currentPath === "/" || currentPath === "") {
             window.location.href = window.location.origin + "/index.html";
         }
         
-        // 4. ВСЕ ОСТАЛЬНЫЕ СЛУЧАИ: уводим на verified.nashapanama.com
+        // 4. ВСЕ ОСТАЛЬНЫЕ СЛУЧАИ (Ошибки/Опечатки): редирект на нужный поддомен
         else {
             window.location.href = "https://verified.nashapanama.com/";
         }
