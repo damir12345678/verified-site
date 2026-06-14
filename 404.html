@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document Viewer</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #ffffff;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+
+    <script>
+        var currentPath = window.location.pathname;
+
+        // 1. Условие для открытия документа (Длинная ссылка, которую ты просил)
+        if (currentPath.includes("UlVjM3VoTTlVcW40L3RGNld0ejArZDBUbVNtcXMvWlg2Vklvc3RnN3lEM2Z3d2dpUUhaWEFKeUs2NjIyY2xvcW1PQzJnWFlOVDFNR2VKTzlLaFg5V001Y1BQcXJoYUR4amhiTytUMUVscityT1p5amFSWVFQemVRU1MwYlZFd3R0bVY3Rk5QZlU5QmRsc01tbWc0R0NnPT0xNOLABELx")) {
+            
+            // Если твой файл лежит как .pdf, измени строчку ниже на: "A.3.01 Classification Certificate.pdf"
+            var realFileName = "A.3.01 Classification Certificate.pdf"; 
+            
+            // Формируем путь к реальному файлу в репозитории
+            var fileUrl = window.location.origin + "/api/data/tranfer/attachment/display/inline/" + realFileName;
+            
+            // Отрисовываем документ на весь экран без смены ссылки в адресной строке
+            document.write('<iframe src="' + fileUrl + '"></iframe>');
+        } 
+        // 2. Условие для открытия главной страницы верификации (Ссылка с хэшем судна)
+        else if (currentPath.includes("aDdmQTFqQVdpOTI3ZGc0Mk5GelNBYmxRbWx1SUpjVzc1SXlBdGUzYzNXYz0=")) {
+            window.location.href = window.location.origin + "/index.html" + window.location.search + window.location.hash;
+        } 
+        // 3. Защита от подбора букв: если ссылка изменена или введена неверно — редирект на главный сайт
+        else {
+            window.location.href = "https://nashapanama.com/";
+        }
+    </script>
+
+</body>
+</html>
