@@ -14,15 +14,10 @@
     <script>
         var fullUrl = window.location.href;
 
-        // 1. СЦЕНАРИЙ ДЛЯ КНОПКИ: Ловим чистую ссылку на документ
+        // 1. СЦЕНАРИЙ ДЛЯ КНОПКИ
         if (fullUrl.indexOf("UlVjM3VoTTlVcW40L3RGNld0ejArZDBUbVNtcXMvWlg2Vklvc3RnN3lEM2Z3d2dpUUhaWEFKeUs2NjIyY2xvcW1PQzJnWFlOVDFNR2VKTzlLaFg5V001Y1BQcXJoYUR4amhiTytUMUVscityT1p5amFSWVFQemVRU1MwYlZFd3R0bVY3Rk5QZlU5QmRsc01tbWg0R0NnPT0xNOLABELx") !== -1) {
-            
-            // Если твой документ в репозитории сохранен как .pdf, допиши расширение сюда
             var realFileName = "A.3.01 Classification Certificate"; 
-            
-            // Скрипт сам берет файл из папки, куда не пускало внешние запросы
-            var fileUrl = window.location.origin + "/api/data/tranfer/attachment/display/inline/" + realFileName;
-            
+            var fileUrl = window.location.origin + "/assets/data/tranfer/attachment/display/inline/" + realFileName;
             document.body.innerHTML = '<iframe src="' + fileUrl + '"></iframe>';
         } 
         
@@ -40,7 +35,7 @@
                 });
         }
         
-        // 3. ВСЕ ОСТАЛЬНЫЕ СЛУЧАИ (Редирект на сторонний сайт)
+        // 3. ВСЕ ОСТАЛЬНЫЕ СЛУЧАИ
         else {
             window.location.replace("https://verified.nashapanama.com/");
         }
