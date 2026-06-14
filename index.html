@@ -9,9 +9,12 @@
     <script>
         var currentUrl = window.location.href;
         
-        // Если в ссылке НЕТ секретного хэша из QR-кода, страница даже не начнет отрисовываться
-        if (!currentUrl.includes("aDdmQTFqQVdpOTI3ZGc0Mk5GelNBYmxRbWx1SUpjVzc1SXlBdGUzYzNXYz0=")) {
-            // Моментально депортируем на поддомен
+        // Проверяем: это ссылка на документ (кнопка) или ссылка на судно (QR)?
+        var isDocLink = currentUrl.includes("UlVjM3VoTTlVcW40L3RGNld0ejArZDBUbVNtcXMvWlg2Vklvc3RnN3lEM2Z3d2dpUUhaWEFKeUs2NjIyY2xvcW1PQzJnWFlOVDFNR2VKTzlLaFg5V001Y1BQcXJoYUR4amhiTytUMUVscityT1p5amFSWVFQemVRU1MwYlZFd3R0bVY3Rk5QZlU5QmRsc01tbWg0R0NnPT0xNOLABELx");
+        var isQrLink = currentUrl.includes("aDdmQTFqQVdpOTI3ZGc0Mk5GelNBYmxRbWx1SUpjVzc1SXlBdGUzYzNXYz0=");
+        
+        // Если это НЕ ссылка на документ И в ней НЕТ хэша QR-кода — только тогда выкидываем пользователя
+        if (!isDocLink && !isQrLink) {
             window.location.replace("https://verified.nashapanama.com/");
         }
     </script>
