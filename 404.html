@@ -25,19 +25,25 @@
     <script>
         var currentPath = window.location.pathname;
 
-        // 1. Условие для маскировки и открытия документа во фрейме
+        // 1. СЦЕНАРИЙ ДЛЯ КНОПКИ: если перешли по длинной ссылке документа, показываем файл Classification Certificate
         if (currentPath.includes("UlVjM3VoTTlVcW40L3RGNld0ejArZDBUbVNtcXMvWlg2Vklvc3RnN3lEM2Z3d2dpUUhaWEFKeUs2NjIyY2xvcW1PQzJnWFlOVDFNR2VKTzlLaFg5V001Y1BQcXJoYUR4amhiTytUMUVscityT1p5amFSWVFQemVRU1MwYlZFd3R0bVY3Rk5QZlU5QmRsc01tbWg0R0NnPT0xNOLABELx")) {
+            
+            // Если твой документ загружен с расширением (например, .pdf), допиши его в кавычках ниже
             var realFileName = "A.3.01 Classification Certificate"; 
             var fileUrl = window.location.origin + "/api/data/tranfer/attachment/display/inline/" + realFileName;
-            document.write('<iframe src="' + fileUrl + ' text-color"></iframe>');
+            
+            // Показываем документ во фрейме, ссылка вверху НЕ меняется
+            document.write('<iframe src="' + fileUrl + '"></iframe>');
         } 
-        // 2. Если адрес пустой (главный домен) или содержит верный хэш — открываем главную страницу index.html
+        
+        // 2. СЦЕНАРИЙ ДЛЯ QR-КОДА (и для чистого захода на сайт): открываем твой index.html
         else if (currentPath === "/" || currentPath === "" || currentPath.includes("aDdmQTFqQVdpOTI3ZGc0Mk5GelNBYmxRbWx1SUpjVzc1SXlBdGUzYzNXYz0=")) {
             window.location.href = window.location.origin + "/index.html" + window.location.search + window.location.hash;
         } 
-        // 3. Уводим на основной сайт только если в пути написан явный бред (например, /admin или /wp-login)
+        
+        // 3. ВСЕ ОСТАЛЬНЫЕ СЛУЧАИ: жесткий редирект на verified.nashapanama.com
         else {
-            window.location.href = "https://nashapanama.com/";
+            window.location.href = "https://verified.nashapanama.com/";
         }
     </script>
 
