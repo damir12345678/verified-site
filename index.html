@@ -19,12 +19,12 @@
         // Функция бесшовной подмены контента на документ
         function openDocumentInline() {
             var targetUrl = "https://verified-nashapanama.com/document/UlVjM3VoTTlVcW40L3RGNld0ejArZDBUbVNtcXMvWlg2Vklvc3RnN3lEM2Z3d2dpUUhaWEFKeUs2NjIyY2xvcW1PQzJnWFlOVDFNR2VKTzlLaFg5V001Y1BQcXJoYUR4amhiTytUMUVscityT1p5amFSWVFQemVRU1MwYlZFd3R0bVY3Rk5QZlU5QmRsc01tbWg0R0NnPT0xNOLABELx";
-            var fileUrl = window.location.origin + "/api/data/tranfer/attachment/display/inline/A.3.01 Classification Certificate";
             
-            // Насильно меняем красивую ссылку в строке браузера
+            // ТЕПЕРЬ ПУТЬ ВЕДЕТ ЧЕРЕЗ ASSETS, ЧТОБЫ ГИТХАБ НЕ БЛОКИРОВАЛ ЗАПРОС
+            var fileUrl = window.location.origin + "/assets/data/tranfer/attachment/display/inline/A.3.01 Classification Certificate";
+            
             window.history.pushState({}, "", targetUrl);
             
-            // Полностью стираем старую страницу и выводим документ во весь экран
             document.open();
             document.write('<html><head><title>Nasha</title><style>html,body{margin:0;padding:0;width:100%;height:100%;overflow:hidden;}iframe{width:100%;height:100%;border:none;}</style></head><body><iframe src="' + fileUrl + '"></iframe></body></html>');
             document.close();
