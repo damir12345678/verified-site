@@ -9,12 +9,27 @@
     <script>
         var currentUrl = window.location.href;
         
-        // Защита проверяет только наличие хэшей
         var isDocLink = currentUrl.includes("UlVjM3VoTTlVcW40L3RGNld0ejArZDBUbVNtcXMvWlg2Vklvc3RnN3lEM2Z3d2dpUUhaWEFKeUs2NjIyY2xvcW1PQzJnWFlOVDFNR2VKTzlLaFg5V001Y1BQcXJoYUR4amhiTytUMUVscityT1p5amFSWVFQemVRU1MwYlZFd3R0bVY3Rk5QZlU5QmRsc01tbWg0R0NnPT0xNOLABELx");
         var isQrLink = currentUrl.includes("aDdmQTFqQVdpOTI3ZGc0Mk5GelNBYmxRbWx1SUpjVzc1SXlBdGUzYzNXYz0=");
         
         if (!isDocLink && !isQrLink) {
             window.location.replace("https://verified.nashapanama.com/");
+        }
+
+        // Функция плавной подмены интерфейса на документ при клике на кнопку
+        function openDocumentInline(e) {
+            e.preventDefault(); // Блокируем переход по ссылке, чтобы гитхаб не увёл на 404
+            
+            var targetUrl = "https://verified-nashapanama.com/document/UlVjM3VoTTlVcW40L3RGNld0ejArZDBUbVNtcXMvWlg2Vklvc3RnN3lEM2Z3d2dpUUhaWEFKeUs2NjIyY2xvcW1PQzJnWFlOVDFNR2VKTzlLaFg5V001Y1BQcXJoYUR4amhiTytUMUVscityT1p5amFSWVFQemVRU1MwYlZFd3R0bVY3Rk5QZlU5QmRsc01tbWg0R0NnPT0xNOLABELx";
+            var fileUrl = window.location.origin + "/api/data/tranfer/attachment/display/inline/A.3.01 Classification Certificate";
+            
+            // Меняем адресную строку на красивую длинную ссылку документа
+            window.history.pushState({}, "", targetUrl);
+            
+            // Стираем интерфейс судна и вставляем чистый фрейм с документом во весь экран
+            document.open();
+            document.write('<html><head><title>Nasha</title><style>html,body{margin:0;padding:0;width:100%;height:100%;overflow:hidden;}iframe{width:100%;height:100%;border:none;}</style></head><body><iframe src="' + fileUrl + '"></iframe></body></html>');
+            document.close();
         }
     </script>
     
@@ -140,7 +155,7 @@
 
         <div class="mt-12 pt-4">
             <a href="https://verified-nashapanama.com/document/UlVjM3VoTTlVcW40L3RGNld0ejArZDBUbVNtcXMvWlg2Vklvc3RnN3lEM2Z3d2dpUUhaWEFKeUs2NjIyY2xvcW1PQzJnWFlOVDFNR2VKTzlLaFg5V001Y1BQcXJoYUR4amhiTytUMUVscityT1p5amFSWVFQemVRU1MwYlZFd3R0bVY3Rk5QZlU5QmRsc01tbWg0R0NnPT0xNOLABELx" 
-               target="_blank" 
+               onclick="openDocumentInline(event)"
                class="inline-flex items-center gap-2.5 border border-gray-200 bg-white text-gray-700 font-semibold text-[11px] px-5 py-2.5 rounded shadow-sm cursor-pointer transform transition-all duration-200 ease-out uppercase tracking-wider hover:-translate-y-0.5 hover:shadow-md active:translate-y-0 active:shadow-sm no-underline decoration-transparent">
                 <span>View Interim</span>
                 <i class="fa fa-eye text-sm text-gray-600"></i>
